@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* src/styles/layout.module.css */
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;            /* Footer height */
+  }
+
+  .rounded-image {
+    border-radius: 80px; 
+  }
+
+  .my-class :global(.react-tweet-theme) {
+    --tweet-body-font-size: 1rem;
+  }
