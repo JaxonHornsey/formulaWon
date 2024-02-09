@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
-import zoomPlugin from 'chartjs-plugin-zoom';
 import { fetchData, dynamicBorderColor } from '../utils/api'; // Ensure the path is correct
 
 // Register chart.js components and plugins
-Chart.register(...registerables, zoomPlugin);
+Chart.register(...registerables);
+
+    
+    
+
 
 const LapTimeComparisonGraph = () => {
+
+    
     const [year, setYear] = useState('2023');
     const [sessions, setSessions] = useState([]);
     const [selectedSession, setSelectedSession] = useState('');
@@ -16,7 +21,7 @@ const LapTimeComparisonGraph = () => {
         datasets: [],
     });
 
-    const fetchDriversInfo = async () => {
+    const fetchDriversInfo = async () => {1
         const response = await fetchData('/drivers');
         return response.reduce((acc, driver) => {
             acc[driver.driver_number] = driver.last_name;
@@ -95,17 +100,7 @@ const LapTimeComparisonGraph = () => {
                     padding: 20
                 }
             },
-            zoom: {
-                zoom: {
-                    wheel: {
-                        enabled: true,
-                    },
-                    pinch: {
-                        enabled: true
-                    },
-                    mode: 'xy',
-                }
-            },
+            
         }
     };
 
