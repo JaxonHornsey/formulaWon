@@ -63,12 +63,15 @@ const LapTimeComparisonGraph = () => {
                         data,
                         borderColor: dynamicBorderColor(driverNumber),
                         tension: 0.4,
+                         hidden: true,
+                        
                     };
                 });
     
                 setChartData({
                     labels,
                     datasets,
+                    hidden: true,
                 });
             })
             .catch(error => console.error("Error fetching lap times or driver info:", error));
@@ -77,6 +80,7 @@ const LapTimeComparisonGraph = () => {
 
     const chartOptions = {
         responsive: true,
+        hidden: true,
         scales: {
             y: {
                 title: {
@@ -95,30 +99,34 @@ const LapTimeComparisonGraph = () => {
             legend: {
                 display: true,
                 position: 'right',
+                align : 'start',
+                hidden: true,
                 labels: {
                     boxWidth: 10,
                     padding: 20
                 }
             },
             
-        }
+        },
     };
 
+    const selectorClass = "mb-3 block w-full p-2 text-base text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500";
+
+
     return (
-        <div>
-            <div className="mb-4 p-4">
-                <div>
-                    <label htmlFor="yearSelector">Select Year:</label>
-                    <select id="yearSelector" value={year} onChange={(e) => setYear(e.target.value)}>
+        <div className="space-y-4 p-4">
+            <div className="flex justify-center items-center gap-4">
+                <div className='flex items-center'>
+                    <label htmlFor="yearSelector" className="mr-2 text-sm font-medium text-slate-300 pb-2"> Year:</label>
+                    <select id="yearSelector" value={year} onChange={(e) => setYear(e.target.value)} className={selectorClass}>
                         <option value="2023">2023</option>
                         <option value="2024">2024</option>
                         {/* Add more years as needed */}
                     </select> 
                 </div>
-                <div className='float-child'>
-                    <label htmlFor="sessionSelector">Select Session:</label>
-                    <select id="sessionSelector" value={selectedSession} onChange={(e) => setSelectedSession(e.target.value)} disabled={!year}>
-                        <option value="">Session</option>
+                <div className='flex items-center'>
+                    <label htmlFor="sessionSelector" className="mr-2 text-sm font-medium text-slate-300 pb-2">Session:</label>
+                    <select id="sessionSelector" value={selectedSession} onChange={(e) => setSelectedSession(e.target.value)} disabled={!year} className={selectorClass}>
                         {sessions.map(session => (
                             <option key={session.session_key} value={session.session_key}>
                                 {session.location} - {session.session_name}
@@ -131,6 +139,8 @@ const LapTimeComparisonGraph = () => {
                 <Line data={chartData} options={chartOptions} />
             )}
         </div>
+
+
     );
 };
 

@@ -12,24 +12,15 @@ const Dashboard = () => {
     return (
         
         <div className="flex min-h-screen bg-gradient-to-bl from-slate-900 to bg-red-400">
-            <main className="flex-grow  p-5">
-                <div className='pt-10'>
-                    <div className='bg-black bg-opacity-60 rounded-3xl w-full'>
-                        <LapTimeComparison />   
-                    </div>
-                </div>
-                
-               
-            </main>
-            <aside className="w-1/5 overflow-y-auto pt-3">
-                <div className='pr-8'>
+
+<aside >
+                <div className='pt-5'>
                 
                 <Image
-                    src="/images/FormulaWon.png"
-                    width={600}
-                    height={300}
+                    src="/images/Won.png"
+                    width={250}
+                    height={150}
                     alt="Picture of the author"
-                    className="rounded-image"
                     />
                 </div>
                
@@ -39,6 +30,23 @@ const Dashboard = () => {
                    
                 </div>
             </aside>
+
+
+
+
+
+
+
+            <main className="flex-grow  pt-4">
+                <div className=''>
+                    <div className='bg-black bg-opacity-60 rounded-3xl w-11/12'>
+                        <LapTimeComparison />   
+                    </div>
+                </div>
+                
+               
+            </main>
+            
         </div>
     );
 };
