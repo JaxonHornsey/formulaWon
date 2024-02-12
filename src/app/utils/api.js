@@ -14,37 +14,37 @@ export const fetchData = async (endpoint) => {
 export const dynamicBorderColor = (driverNumber) => {
   // Map of driver numbers to colors
   const colorMap = {
-    44: '#419CFF', // Lewis Hamilton
-    63: '#7BB9FD', // George Russell
+    44: '#1e6589', // Lewis Hamilton
+    63: '#7cbfe2', // George Russell
 
-    1: '#1B00FF', // Max Verstappen
-    11: '#6387FF', // Sergio Perez
+    1: '#5e00e3', // Max Verstappen
+    11: '#ae74ff', // Sergio Perez
 
-    55: '#FE7F7F', // Carlos Sainz
-    16: '#FF0000', // Charles Leclerc
+    55: '#ff598c', // Carlos Sainz
+    16: '#c1003b', // Charles Leclerc
     
-    4: '#FFAD21', // Lando Norris
-    81: '#FFBF76', // Piastri
+    4: '#dc5600', // Lando Norris
+    81: '#ff9e5f', // Piastri
 
-    31: '#FF84FB', // Esteban Ocon
-    10: '#FE00F6', // Pierre Gasly
+    31: '#bc0fa8', // Esteban Ocon
+    10: '#f36ee3', // Pierre Gasly
 
-    14: '#00872B', // Fernando Alonso
-    18: '#70E394', // Lance Stroll
+    14: '#39816e', // Fernando Alonso
+    18: '#86cab8', // Lance Stroll
 
-    3: '#34546D', // Daniel Ricciardo
-    22: '#56626B', // Yuki Tsunoda
+    3: '#6e7e6c', // Daniel Ricciardo
+    22: '#aeb8ad', // Yuki Tsunoda
     
-    77: '#3F0412', // Valtteri Bottas
-    24: '#3F0412', // Zhou
+    77: '#96375c', // Valtteri Bottas
+    24: '#cc7295', // Zhou
     
-    20: '#FFD9D9', // Kevin Magnussen
-    27: '#FBFAFA', // Hulkingberg 
+    20: '#a4ad52', // Kevin Magnussen
+    27: '#ccd19f', // Hulkingberg 
 
-    23: '#31FFFA', // Albon
-    2: '#91FFFD', // Sargent
+    23: '#137bff', // Albon
+    2: '#a0caff', // Sargent
 
-    21: '#31FFFA', //Debris
+    21: '#877d78', //Debris
   };
 
   // Return the corresponding color or a default color if not found

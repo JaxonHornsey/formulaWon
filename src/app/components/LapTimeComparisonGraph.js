@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Chart, registerables } from 'chart.js';
+import { Chart, registerables,Interaction  } from 'chart.js';
 import { fetchData, dynamicBorderColor } from '../utils/api'; // Ensure the path is correct
+import {CrosshairPlugin,Interpolate} from 'chartjs-plugin-crosshair';
+
 
 // Register chart.js components and plugins
-Chart.register(...registerables);
-
+Chart.register(...registerables,CrosshairPlugin);
+Interaction.modes.interpolate = Interpolate
     
     
 
@@ -91,6 +93,12 @@ const LapTimeComparisonGraph = () => {
     const chartOptions = {
         responsive: true,
         hidden: true,
+        tooltip: {
+            enabled: true,
+            mode: 'interpolate',
+            intersect: true,
+            position: 'average'
+        },
         scales: {
             y: {
                 title: {
@@ -115,7 +123,39 @@ const LapTimeComparisonGraph = () => {
                     padding: 20
                 }
             },
+            tooltip: {
+                enabled: true,
+                mode: 'index', // 'index' or 'nearest' may work depending on your needs
+                intersect: false,
+                position: 'nearest', // Can help with displaying the tooltip when multiple points are close together
+                caretSize: 5, // Size of the caret on the tooltip
+                 xAlign: 'center', // This can be 'left', 'center', or 'right'
+                yAlign: 'center'
+            },
+            crosshair: {
+                line: {
+                    color: '#F11',  // Customize crosshair line color
+                    width: 0.1        // Customize crosshair line width
+                },
+                sync: {
+                    enabled: false,  // Sync if using multiple charts, disable otherwise
+                    group: 1,       // Group index if syncing
+                    suppressTooltips: false, // Do not suppress tooltips when syncing
+                }
+            },
+            interaction: {
+                mode: 'nearest',
+                intersect: false,
+            },
+            zoom: {
+                enabled: false,                                      // enable zooming
+                zoomboxBackgroundColor: 'rgba(66,133,244,0.2)',     // background color of zoom box 
+                zoomboxBorderColor: '#48F',                         // border color of zoom box
+                zoomButtonText: 'Reset Zoom',                       // reset zoom button text
+                zoomButtonClass: 'reset-zoom',                      // reset zoom button class
+            },
             
+
         },
     };
 
