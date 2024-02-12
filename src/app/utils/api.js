@@ -14,25 +14,37 @@ export const fetchData = async (endpoint) => {
 export const dynamicBorderColor = (driverNumber) => {
   // Map of driver numbers to colors
   const colorMap = {
-    44: '#00D2BE', // Lewis Hamilton
-    1: '#1E41FF', // Max Verstappen
-    55: '#FF8700', // Carlos Sainz
-    11: '#0600EF', // Sergio Perez
-    63: '#0090FF', // George Russell
+    44: '#419CFF', // Lewis Hamilton
+    63: '#7BB9FD', // George Russell
+
+    1: '#1B00FF', // Max Verstappen
+    11: '#6387FF', // Sergio Perez
+
+    55: '#FE7F7F', // Carlos Sainz
     16: '#FF0000', // Charles Leclerc
-    4: '#FFF500', // Lando Norris
-    31: '#F0D787', // Esteban Ocon
-    14: '#FF8700', // Fernando Alonso
-    3: '#C4C4C4', // Daniel Ricciardo
-    18: '#00BFFF', // Lance Stroll
-    5: '#FFFFFF', // Sebastian Vettel
-    47: '#FF00FF', // Mick Schumacher
-    10: '#00FF00', // Pierre Gasly
-    22: '#007F00', // Yuki Tsunoda
-    77: '#0000FF', // Valtteri Bottas
-    99: '#9B0000', // Antonio Giovinazzi
-    6: '#000000', // Nicholas Latifi
-    20: '#FF69B4', // Kevin Magnussen
+    
+    4: '#FFAD21', // Lando Norris
+    81: '#FFBF76', // Piastri
+
+    31: '#FF84FB', // Esteban Ocon
+    10: '#FE00F6', // Pierre Gasly
+
+    14: '#00872B', // Fernando Alonso
+    18: '#70E394', // Lance Stroll
+
+    3: '#34546D', // Daniel Ricciardo
+    22: '#56626B', // Yuki Tsunoda
+    
+    77: '#3F0412', // Valtteri Bottas
+    24: '#3F0412', // Zhou
+    
+    20: '#FFD9D9', // Kevin Magnussen
+    27: '#FBFAFA', // Hulkingberg 
+
+    23: '#31FFFA', // Albon
+    2: '#91FFFD', // Sargent
+
+    21: '#31FFFA', //Debris
   };
 
   // Return the corresponding color or a default color if not found
@@ -64,34 +76,3 @@ export const dynamicBackgroundColors = (teams) => {
   // Map the teams to their colors
   return teams.map(team => teamColors[team]);
 };
-
-
-export default async function handler(req, res) {
-  // Your Twitter API bearer token
-  const bearerToken = process.env.TWITTER_BEARER_TOKEN;
-  const usernames = "f1trollofficial,F1,FDataAnalysis"; // Twitter usernames separated by commas
-
-  const url = `https://api.twitter.com/2/tweets/search/recent?query=from:${usernames}&max_results=10&expansions=author_id`;
-
-  try {
-    const twitterResponse = await fetch(url, {
-      headers: {
-        "Authorization": `Bearer ${bearerToken}`,
-        "User-Agent": "v2RecentSearchJS",
-      },
-    });
-
-    if (!twitterResponse.ok) {
-      throw new Error('Failed to fetch tweets');
-    }
-
-    const data = await twitterResponse.json();
-    const tweets = data.data.filter((tweet, index, self) => 
-      self.findIndex(t => t.author_id === tweet.author_id) === index);
-
-    res.status(200).json({ tweets });
-  } catch (error) {
-    console.error("There was an error fetching tweets:", error);
-    res.status(500).json({ error: "Error fetching tweets" });
-  }
-}

@@ -40,6 +40,8 @@ const LapTimeComparisonGraph = () => {
             .catch(error => console.error("Error fetching sessions:", error));
     }, [year]);
 
+    const orderedDriverNumbers = [1,11,44,63,16,55,4,81,31,10,14,18,,21,3,22,77,24,23,2,20,27];
+
     useEffect(() => {
         if (selectedSession) {
             Promise.all([
@@ -50,11 +52,21 @@ const LapTimeComparisonGraph = () => {
                 const maxLapNumber = Math.max(...lapData.map(lap => lap.lap_number));
                 const labels = Array.from({ length: maxLapNumber }, (_, i) => `Lap ${i + 1}`);
     
-                const drivers = [...new Set(lapData.map(lap => lap.driver_number))];
-                const datasets = drivers.map(driverNumber => {
+                // Get unique list of driver numbers
+                const driverNumbers = [...new Set(lapData.map(lap => lap.driver_number))];
+    
+                // Sort driver numbers based on predefined order
+                driverNumbers.sort((a, b) => {
+                    return orderedDriverNumbers.indexOf(a) - orderedDriverNumbers.indexOf(b);
+                });
+    
+                // Map sorted driver numbers to datasets
+                const datasets = driverNumbers.map(driverNumber => {
                     const driverLaps = lapData.filter(lap => lap.driver_number === driverNumber);
-                    const data = Array.from({ length: maxLapNumber }, (_, i) => {
-                        const lap = driverLaps.find(l => l.lap_number === i + 1);
+    
+                    // Create data array with nulls for missing laps
+                    const data = labels.map((_, index) => {
+                        const lap = driverLaps.find(l => l.lap_number === index + 1);
                         return lap ? lap.lap_duration : null;
                     });
     
@@ -63,20 +75,18 @@ const LapTimeComparisonGraph = () => {
                         data,
                         borderColor: dynamicBorderColor(driverNumber),
                         tension: 0.4,
-                         hidden: true,
-                        
+                        hidden: true, // Set to false if you want to show the dataset by default
                     };
                 });
     
                 setChartData({
                     labels,
                     datasets,
-                    hidden: true,
                 });
             })
             .catch(error => console.error("Error fetching lap times or driver info:", error));
         }
-    }, [selectedSession]);
+    }, [selectedSession, orderedDriverNumbers]); 
 
     const chartOptions = {
         responsive: true,
@@ -100,7 +110,6 @@ const LapTimeComparisonGraph = () => {
                 display: true,
                 position: 'right',
                 align : 'start',
-                hidden: true,
                 labels: {
                     boxWidth: 10,
                     padding: 20
