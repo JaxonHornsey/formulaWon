@@ -118,8 +118,9 @@ const LapTimeComparisonGraph = () => {
                 display: true,
                 position: 'right',
                 align : 'start',
+                rtl: true,
                 labels: {
-                    boxWidth: 10,
+                    boxWidth: 20,
                     padding: 20
                 }
             },

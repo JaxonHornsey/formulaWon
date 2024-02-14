@@ -6,26 +6,35 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic';
 const Dashboard = () => {
 
-    const [selectedGraph, setSelectedGraph] = useState('lapTimeComparison');
+    const [selectedButton, setSelectedButton] = useState('Overview');
     
     
 
     const buttonClass = (graphName) =>
-    `mb-2 p-2 w-full text-sm bg-gradient-to-r from-red-900 to bg-red-700 rounded hover:bg-slate-600 transition duration-300 ease-in-out ${
-        selectedGraph === graphName ? 'bg-gradient-to-r from-green-900 to bg-green-700 hover:bg-green-600' : 'bg-gradient-to-r from-red-950 to bg-red-700 hover:bg-green-300'
+    `p-2 w-full text-sm  hover:bg-slate-600 transition duration-300 ease-in-out  bg-opacity-40 border-opacity-70 ${
+        selectedButton === graphName ? 'bg-gradient-to-r from-red-800 to bg-orange-700 hover:bg-orange-700' : 'bg-gradient-to-r from-red-950 to bg-red-900 hover:bg-orange-400 '
     }`;
 
-    <button
-                    onClick={() => setSelectedGraph('lapTimeComparison')}
-                    className="mb-2 p-2 w-full text-sm bg-gradient-to-r from-red-900 to bg-red-700 rounded hover:bg-slate-600 transition duration-300 ease-in-out"
-                >
-                    Lap Time Comparison
-                </button>
-
-
-
-    const renderGraph = () => {
-        switch (selectedGraph) {
+    const sidebarOption = () => {
+        switch (selectedButton) {
+            case 'Overview':
+                return <div className="p-4">
+                    <h2 className="text-lg font-bold mb-4">Project Overview</h2>
+                    <br></br>
+                    <p >
+                        Formula Won Dashboard is a dynamic platform providing real-time and 
+                        historical data visualization for Formula 1 races. It offers users the ability to compare lap times, analyze driver performance, and explore various statistics through interactive charts.
+                    </p>
+                    <br></br>
+                    <img src="/images/Won.png" alt="Dashboard Screenshot" className="mb-4" />
+                    <h3 className="text-md font-semibold mb-2">How to Use:</h3>
+                    <ul className="list-disc list-inside">
+                        <li>Select a year to view the available race sessions.</li>
+                        <li>Choose a session to display the lap time comparison chart.</li>
+                        <li>Hover over the chart data points to see detailed lap times.</li>
+                    </ul>
+                {/* Add more images or content as needed */}
+                </div>
             case 'secondGraph':
                 return <h1>Sorry</h1>;
             case 'thirdGraph':
@@ -40,8 +49,8 @@ const Dashboard = () => {
         
         <div className="flex min-h-screen bg-gradient-to-bl from-slate-900 to bg-red-400">
 
-            <aside className=" p-4 text-white flex flex-col items-center">
-                <div className="h-44">
+            <aside className=" text-white flex-none w-72 flex-col items-center bg-black bg-opacity-40 border-r-2 border-opacity-30 border-black ">
+                <div className=" p-4 h-44">
                     <Image
                         src="/images/Won.png"
                         width={250}
@@ -50,20 +59,29 @@ const Dashboard = () => {
                     />
                 </div>
 
+                <button 
+                    onClick={() => setSelectedButton('Overview')}
+                    className={buttonClass('Overview')}
+                >
+                    <div>
+                    Overview
+                    </div>
+                </button>
+                
                 <button
-                    onClick={() => setSelectedGraph('lapTimeComparison')}
+                    onClick={() => setSelectedButton('lapTimeComparison')}
                     className={buttonClass('lapTimeComparison')}
                 >
                     Lap Time Comparison
                 </button>
                 <button
-                    onClick={() => setSelectedGraph('secondGraph')}
+                    onClick={() => setSelectedButton('secondGraph')}
                     className={buttonClass('secondGraph')}
                 >
                     Second Graph
                 </button>
                 <button
-                    onClick={() => setSelectedGraph('thirdGraph')}
+                    onClick={() => setSelectedButton('thirdGraph')}
                     className={buttonClass('thirdGraph')}
                 >
                     Third Graph
@@ -71,13 +89,13 @@ const Dashboard = () => {
 
             </aside>
 
-            <main className="flex-grow pl-3 pt-4 pr-5">
+            <main className="flex-grow pl-1 pt-4 pr-5">
 
-                <div className='w-full'>
-                    <div className='bg-black bg-opacity-60 rounded-3xl w-full'>
-                        {renderGraph()}   
-                    </div>
-                </div>
+            <div className={`w-11/12 rounded-3xl ${
+                selectedButton === 'Overview' ? 'bg-opacity-0' : 'bg-black bg-opacity-60'
+            }`}>
+                {sidebarOption()}
+            </div>
                 
             </main>
             
