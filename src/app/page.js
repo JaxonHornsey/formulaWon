@@ -4,6 +4,9 @@ import React, { useState, useEffect } from 'react';
 import LapTimeComparison from './components/LapTimeComparisonGraph';
 import Image from 'next/image'
 import dynamic from 'next/dynamic';
+import { FaSearch, FaHome, FaMusic, FaFilm, FaBook, FaCog, FaHeadset, FaUser, FaPen, FaCircle, FaChartLine } from 'react-icons/fa';
+import Divider from '@mui/material/Divider';
+import OverviewContent from './components/OverviewContent';
 const Dashboard = () => {
 
     const [selectedButton, setSelectedButton] = useState('Overview');
@@ -11,35 +14,32 @@ const Dashboard = () => {
     
 
     const buttonClass = (graphName) =>
-    `p-2 w-full text-sm  hover:bg-slate-600 transition duration-300 ease-in-out  bg-opacity-40 border-opacity-70 ${
-        selectedButton === graphName ? 'bg-gradient-to-r from-red-800 to bg-orange-700 hover:bg-orange-700' : 'bg-gradient-to-r from-red-950 to bg-red-900 hover:bg-orange-400 '
+    `flex items-center p-3 w-full text-sm transition duration-300 ease-in-out text-slate-300 ${
+        selectedButton === graphName 
+            ? 'text-yellow-500 border-s-4 border-yellow-500' // Active button text turns yellow
+            : ' hover:bg-slate-600 hover:bg-opacity-35' // Inactive button with gray text
     }`;
+
 
     const sidebarOption = () => {
         switch (selectedButton) {
             case 'Overview':
-                return <div className="p-4">
-                    <h2 className="text-lg font-bold mb-4">Project Overview</h2>
-                    <br></br>
-                    <p >
-                        Formula Won Dashboard is a dynamic platform providing real-time and 
-                        historical data visualization for Formula 1 races. It offers users the ability to compare lap times, analyze driver performance, and explore various statistics through interactive charts.
-                    </p>
-                    <br></br>
-                    <img src="/images/Won.png" alt="Dashboard Screenshot" className="mb-4" />
-                    <h3 className="text-md font-semibold mb-2">How to Use:</h3>
-                    <ul className="list-disc list-inside">
-                        <li>Select a year to view the available race sessions.</li>
-                        <li>Choose a session to display the lap time comparison chart.</li>
-                        <li>Hover over the chart data points to see detailed lap times.</li>
-                    </ul>
-                {/* Add more images or content as needed */}
-                </div>
-            case 'secondGraph':
-                return <h1>Sorry</h1>;
-            case 'thirdGraph':
-                return <h1>Sorry</h1>;
-            case 'lapTimeComparison':
+                return <OverviewContent />;
+            case 'Features':
+                return ;
+            case 'LiveData1':
+                return ;
+            case 'LiveData2':
+                return ;
+            case 'LiveData3':
+                return ;
+            case 'Historic1':
+                return <LapTimeComparison />;
+            case 'Historic2':
+                return ;
+            case 'Historic3':
+                return ;
+
             default:
                 return <LapTimeComparison />;
         }
@@ -49,8 +49,8 @@ const Dashboard = () => {
         
         <div className="flex min-h-screen bg-gradient-to-bl from-slate-900 to bg-red-400">
 
-            <aside className=" text-white flex-none w-72 flex-col items-center bg-black bg-opacity-40 border-r-2 border-opacity-30 border-black ">
-                <div className=" p-4 h-44">
+            <aside className=" text-white flex-none w-56 flex-col items-center bg-black bg-opacity-80">
+                <div className=" p-8 h-44">
                     <Image
                         src="/images/Won.png"
                         width={250}
@@ -59,33 +59,80 @@ const Dashboard = () => {
                     />
                 </div>
 
+                
+                <div className="flex items-center pl-2">
+                    <FaBook className="text-current mr-2" /> {/* Adjust the size, color, and margins as needed */}
+                    <h1 className="text-left">Guide and Usage</h1>
+                </div>
+
+                <Divider className='bg-white m-2'/>
+
                 <button 
                     onClick={() => setSelectedButton('Overview')}
                     className={buttonClass('Overview')}
                 >
-                    <div>
-                    Overview
-                    </div>
+
+                <FaHome className="mr-2" /> How to use
                 </button>
                 
-                <button
-                    onClick={() => setSelectedButton('lapTimeComparison')}
-                    className={buttonClass('lapTimeComparison')}
+                <button 
+                    onClick={() => setSelectedButton('Features')}
+                    className={buttonClass('Features')}
                 >
-                    Lap Time Comparison
+                    <FaPen className="mr-2" /> Features & Updates
+                </button>
+                
+                <div className="flex items-center pl-2 pt-10">
+                    <FaHeadset className="text-current mr-2" /> {/* Adjust the size, color, and margins as needed */}
+                    <h1 className="text-left">Interactive Live Data</h1>
+                </div>
+
+                <Divider className='bg-white m-2'/>
+                <button
+                    onClick={() => setSelectedButton('LiveData1')}
+                    className={buttonClass('LiveData1')}
+                >
+                      First Graph
                 </button>
                 <button
-                    onClick={() => setSelectedButton('secondGraph')}
-                    className={buttonClass('secondGraph')}
+                    onClick={() => setSelectedButton('LiveData2')}
+                    className={`${buttonClass('LiveData2')}`}
                 >
-                    Second Graph
+                     Second Graph
                 </button>
                 <button
-                    onClick={() => setSelectedButton('thirdGraph')}
-                    className={buttonClass('thirdGraph')}
+                    onClick={() => setSelectedButton('LiveData3')}
+                    className={buttonClass('LiveData3')}
                 >
                     Third Graph
                 </button>
+
+
+                <div className="flex items-center pl-2 pt-10">
+                    <FaSearch className="text-current mr-2" /> {/* Adjust the size, color, and margins as needed */}
+                    <h1 className="text-left">Historical Data</h1>
+                </div>
+
+                <Divider className='bg-white m-2'/>
+                <button
+                    onClick={() => setSelectedButton('Historic1')}
+                    className={buttonClass('Historic1')}
+                >
+                      Lap Time Comparison
+                </button>
+                <button
+                    onClick={() => setSelectedButton('Historic2')}
+                    className={`${buttonClass('Historic2')}`}
+                >
+                     Second Graph
+                </button>
+                <button
+                    onClick={() => setSelectedButton('Historic3')}
+                    className={buttonClass('Historic3')}
+                >
+                    Third Graph
+                </button>
+                
 
             </aside>
 
