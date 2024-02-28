@@ -8,14 +8,21 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "proxy": "https://api.openf1.org",
   "dependencies": {
     "@cubejs-client/core": "^0.31.0",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.10",
     "chart.js": "^4.4.1",
+    "chartjs-plugin-crosshair": "^2.0.0",
+    "chartjs-plugin-zoom": "^2.0.1",
     "isomorphic-unfetch": "^4.0.2",
     "next": "14.1.0",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
+    "react-icons": "^5.0.1",
     "react-tweet": "^3.2.0"
   },
   "devDependencies": {
