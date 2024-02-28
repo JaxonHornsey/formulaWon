@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Scatter } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
-import zoomPlugin from "chartjs-plugin-zoom";
 import {
   fetchData,
   dynamicBorderColor,
   dynamicColorForCompound,
 } from "../utils/api";
 
-Chart.register(...registerables, zoomPlugin);
+Chart.register(...registerables);
 
 const PitStopTimelineChart = () => {
   const [year, setYear] = useState("2023");
