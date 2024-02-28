@@ -22,6 +22,7 @@ const PitStopTimelineChart = () => {
     const driverInfo = await fetchData("/drivers");
     return driverInfo.reduce((acc, driver) => {
       acc[driver.driver_number] = driver.last_name;
+      return acc;
     }, {});
   };
 
